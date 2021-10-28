@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "niaaml api"
 version = "0.1.0"
-description = ""
+description = "API for remote work with NiaAML software."
 authors = ["alenrajsp <alen.rajsp@um.si>"]
 
 [tool.poetry.dependencies]
