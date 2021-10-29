@@ -90,6 +90,14 @@ POST http://localhost:8000/pipeline/export/text?data_id=50e7e53e-f85c-4361-b52a-
 POST http://localhost:8000/pipeline/export/ppln?data_id=50e7e53e-f85c-4361-b52a-a31422719743
 ```
 
+## Licence
 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+This package is distributed under the MIT License. This license can be found online at <http://www.opensource.org/licenses/MIT>.
+
+## Disclaimer
+
+This framework is provided as-is, and there are no guarantees that it fits your purposes or that it is bug-free. Use it at your own risk!
+
+## References
+
+L. Pečnik, I. Fister Jr. "[NiaAML: AutoML framework based on stochastic population-based nature-inspired algorithms](https://joss.theoj.org/papers/10.21105/joss.02949)." Journal of Open Source Software 6.61 (2021): 2949.
