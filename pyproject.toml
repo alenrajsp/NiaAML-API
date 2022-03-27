@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "niaaml api"
-version = "0.1.0"
-description = "API for remote work with NiaAML software."
+version = "0.1.1"
+description = "API for remote work with NiaAML software"
 authors = ["alenrajsp <alen.rajsp@um.si>"]
 
 [tool.poetry.dependencies]
 python = "^3.9.0"
-niaaml = "^1.1.6"
+niaaml = "^1.1.7"
 fastapi = {extras = ["all"], version = "^0.68.1"}
 python-multipart = "^0.0.5"
 
