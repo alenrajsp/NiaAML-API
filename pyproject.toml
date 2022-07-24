@@ -6,8 +6,8 @@ authors = ["alenrajsp <alen.rajsp@um.si>"]
 
 [tool.poetry.dependencies]
 python = "^3.9.0"
-niaaml = "^1.1.7"
-fastapi = {extras = ["all"], version = "^0.68.1"}
+niaaml = "^1.1.9"
+fastapi = {extras = ["all"], version = "^0.79.0"}
 python-multipart = "^0.0.5"
 
 [tool.poetry.dev-dependencies]
