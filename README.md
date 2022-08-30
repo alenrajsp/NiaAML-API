@@ -1,6 +1,7 @@
 # NiaAML API
 
 NiaAML API is a Python library for using [NiaAML](https://github.com/lukapecnik/NiaAML) as an FastAPI based web API.
+The currently used version of **NiaAML** is **1.1.10**.
 
 ## Installation
 
@@ -10,9 +11,9 @@ NiaAML API is a Python library for using [NiaAML](https://github.com/lukapecnik/
 poetry install
 ```
 3. Navigate to project folder and run server in terminal.
-```bash
-uvicorn main:app --reload
-```
+* ```bash uvicorn main:app --reload```
+or
+* run the ```main.py``` script of the project
 
 ## How to use (locally)
 1. Run server
@@ -31,10 +32,9 @@ uvicorn main:app --reload
 | Folder / file      | Description |
 | ----------- | ----------- |
 | /csvfiles      | Folder where all uploaded csv files are saved.       |
-| /pipelineJobsBackup   | Folder where all pipeline parameters are backed up (when tasks are uploaded to the worker queue)        |
 | /pipelineResults   | Folder where **.ppln** and **.txt** files of results are saved        |
 | jobs.db   | SQLite3 database where all executed and current jobs are saved.        |
-
+| jobs.db   | SQLite3 database where all job queues are saved.        |
 
 
 ### Workflow
@@ -44,43 +44,56 @@ Upload a csv file (with last column of the CSV file as a class). The method retu
 ### Running the pipeline
 To run the pipeline you need to call the [/pipeline/run](http://localhost:8000/docs) method. 
 The **data_id** parameter represents the **uuid** returned from the CSV upload method. 
-**wait_to_execution** parameter represents if the client is going to wait for the pipeline to complete (**=true**) if the job is meant to be sent over to worker queue (**=false**).
 
 To execute the [example](https://github.com/lukapecnik/NiaAML#example-of-usage) shown in NiaAML documentation the following request is needed.
 
 ```
-POST http://localhost:8000/pipeline/run?data_id=50e7e53e-f85c-4361-b52a-a31422719743&wait_to_execution=false
+POST http://localhost:8000/pipeline/run?data_id=50e7e53e-f85c-4361-b52a-a31422719743
 REQUEST BODY: {
   "web_pipeline_optimizer": {
     "classifiers": [
-      ['AdaBoost', 'Bagging', 'MultiLayerPerceptron', 'RandomForest', 'ExtremelyRandomizedTrees', 'LinearSVC']
+      "AdaBoost"
     ],
-    "feature_selection_algorithms": ['SelectKBest', 'SelectPercentile', 'ParticleSwarmOptimization', 'VarianceThreshold'],
-    "feature_transform_algorithms": ['Normalizer', 'StandardScaler'],
-    "categorical_features_encoder": null,
-    "imputer": null,
-    "log": true,
-    "log_verbose": true,
-    "log_output_file": null
+    "feature_selection_algorithms": [
+      "SelectKBest"
+    ],
+    "feature_transform_algorithms": [
+      "Normalizer"
+    ],
+    "categorical_features_encoder": "OneHotEncoder",
+    "imputer": "SimpleImputer",
+    "log": false,
+    "log_verbose": false,
+    "log_output_file": ""
   },
   "web_pipeline_optimizer_run": {
     "fitness_name": "Accuracy",
-    "pipeline_population_size": 15,
-    "inner_population_size": 15,
-    "number_of_pipeline_evaluations": 300,
-    "number_of_inner_evaluations": 300,
+    "pipeline_population_size": 5,
+    "inner_population_size": 5,
+    "number_of_pipeline_evaluations": 5,
+    "number_of_inner_evaluations": 5,
     "optimization_algorithm": "ParticleSwarmAlgorithm",
     "inner_optimization_algorithm": "ParticleSwarmAlgorithm"
   }
 }
 ```
 
+The returned response should look something like:
+``` JSON
+{
+  "file_id": "2e4b64b1-e192-4f24-b5c7-045bb51aee67",
+  "result": "Added to queue!",
+  "export": "85486cf6-f760-4556-9f73-460c1aa0b80d"
+}
+```
+Where the **export** attribute is the input parameter for the *data_id* of */pipeline/export* methods, since more than one pipeline can be created from a CSV file.
+
 ### Retrieving the results
 
 Once jobs are completed the **.ppln** and **.txt** files can be retrieved using the following two requests:
 
 
-**.txt result files**
+**.txt result files** - *note data_id = **export** value of **/pipeline/run** method.
 ```
 POST http://localhost:8000/pipeline/export/text?data_id=50e7e53e-f85c-4361-b52a-a31422719743
 ```
@@ -90,6 +103,8 @@ POST http://localhost:8000/pipeline/export/text?data_id=50e7e53e-f85c-4361-b52a-
 POST http://localhost:8000/pipeline/export/ppln?data_id=50e7e53e-f85c-4361-b52a-a31422719743
 ```
 
+## Tests
+All of the endpoints have functional tests avaliable for them in the **tests** directory. You can also check the tests to better understand how to make requests with the client.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

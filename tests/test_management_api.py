@@ -1,13 +1,9 @@
 import os
 import unittest
-
-import requests
-
 from main import app
 from fastapi.testclient import TestClient
 from database import LiteDatabase
 from pathlib import Path
-from os import sep
 
 from tests.helper_methods import upload_file, run
 from worker.PipelineWorker import run_pipeline

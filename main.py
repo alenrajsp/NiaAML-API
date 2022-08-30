@@ -5,19 +5,14 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import LiteDatabase
-from hanging_threads import start_monitoring
+from worker.PipelineWorker import PipelineWorker
+from routers import pipeline, management
+
 
 # Create folders if they do not exist.
-from worker.PipelineWorker import PipelineWorker
-
-#start_monitoring(seconds_frozen=10, test_interval=100)
-
-
 Path(f"{Path(__file__).parent}{sep}data{sep}").mkdir(parents=True, exist_ok=True)
 Path(f"{Path(__file__).parent}{sep}data{sep}csvfiles{sep}").mkdir(parents=True, exist_ok=True)
 Path(f"{Path(__file__).parent}{sep}data{sep}pipelineResults{sep}").mkdir(parents=True, exist_ok=True)
-
-from routers import pipeline, management
 
 
 app = FastAPI()
@@ -35,8 +30,6 @@ app.add_middleware(
 
 app.include_router(pipeline.router)
 app.include_router(management.router)
-
-
 
 if __name__ == "__main__":
     ldb = LiteDatabase()

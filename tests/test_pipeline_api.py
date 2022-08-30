@@ -1,8 +1,6 @@
 import os
 import unittest
 
-import requests
-
 from main import app
 from fastapi.testclient import TestClient
 from database import LiteDatabase
@@ -56,8 +54,6 @@ class TestPipelineApi(unittest.TestCase):
         file_ppln_res = export_ppln(client=self.client, export=response_run.json()["export"])
         self.assertEqual(file_ppln_res.status_code, 200, "PPLN file export failed")
 
-        a=100
-
 
     def tearDown(self) -> None:
         os.remove(self.file_location)
@@ -72,9 +68,6 @@ class TestPipelineApi(unittest.TestCase):
 
         self.ldb.execute("DELETE FROM jobs WHERE uuid = ?;", (self.data_id,))
         self.ldb.execute_queue("DELETE FROM queue WHERE csv = ?;", (self.data_id,))
-
-
-        a=100
 
 
 if __name__ == '__main__':

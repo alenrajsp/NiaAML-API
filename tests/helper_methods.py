@@ -1,8 +1,11 @@
+from os import sep
+
 import requests
 from fastapi.testclient import TestClient
-
+from pathlib import Path
 def upload_file(client:TestClient) -> requests.Response:
-    with open('./data/data.csv', 'rb') as f:
+    location = f"{Path(__file__).parent.parent}{sep}tests{sep}data{sep}data.csv"
+    with open(location) as f:
         file = {'csv_file': f}
         return client.post(
             url="/pipeline/uploadCsv",
