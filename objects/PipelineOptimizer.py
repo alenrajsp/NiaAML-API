@@ -4,7 +4,6 @@ from pydantic import BaseModel
 
 class WebPipelineOptimizer(BaseModel):
     """JSON model for niaaml.PipelineOptimizer class"""
-    data: Optional[str]  # fix me
     classifiers: list[str]
     feature_selection_algorithms: Optional[list[str]]
     feature_transform_algorithms: Optional[list[str]]
