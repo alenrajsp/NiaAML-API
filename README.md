@@ -24,7 +24,7 @@ or
 1. Use the official image from DockerHub repository 
    (alenrajsp/niaamlapi:0.1)[https://hub.docker.com/r/alenrajsp/niaamlapi]
 2. Run from terminal with 
-   `docker run -p <PORT>:80 alenrajsp/niaamlapi:0.1`. 
+   `docker run -p <PORT>:80 alenrajsp/niaamlapi:main`. 
    The **\<PORT>** variable is the port from which you want to access the container.
 3. If data is to be preserved the **/src/data** folder needs to be made into a volume. 
    The **data** folder contains the following subfolders and files:
