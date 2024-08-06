@@ -1,7 +1,11 @@
 # NiaAML API
 
+<p style="text-align:center" align="center"><img src="https://github.com/alenrajsp/NiaAML-API/blob/main/.github/NiaAMLApi_Logo.png?raw=true" alt="NiaAML API logo" width="200"/></p>
+
+![GitHub license](https://img.shields.io/github/license/alenrajsp/NiaAML-API)
+
 NiaAML API is a Python library for using [NiaAML](https://github.com/lukapecnik/NiaAML) as an FastAPI based web API.
-The currently used version of **NiaAML** is **1.1.10**.
+The currently used version of **NiaAML** is **2.1.0**.
 
 ## Installation
 
@@ -22,7 +26,8 @@ or
 
 ## How to use (Docker)
 1. Use the official image from DockerHub repository 
-   (alenrajsp/niaamlapi:0.1)[https://hub.docker.com/r/alenrajsp/niaamlapi]
+   (alenrajsp/niaamlapi:0.2)[https://hub.docker.com/r/alenrajsp/niaamlapi]
+
 2. Run from terminal with 
    `docker run -p <PORT>:80 alenrajsp/niaamlapi:main`. 
    The **\<PORT>** variable is the port from which you want to access the container.
@@ -104,7 +109,7 @@ POST http://localhost:8000/pipeline/export/ppln?data_id=50e7e53e-f85c-4361-b52a-
 ```
 
 ## Tests
-All of the endpoints have functional tests avaliable for them in the **tests** directory. You can also check the tests to better understand how to make requests with the client.
+All of the endpoints have functional tests available for them in the **tests** directory. You can also check the tests to better understand how to make requests with the client.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
